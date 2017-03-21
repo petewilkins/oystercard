@@ -62,10 +62,22 @@ I need to **have the minimum amount (£1)** for a single journey.
 1. Card => To pay, condition: balance = 1
 
 ##User Story 7
+In order to pay for my journey
+As a customer
+When my journey is complete, I need the correct amount deducted from my card
 ### Nouns
+In order to pay for my journey
+As a **customer**
+When my journey is complete, I need the correct amount deducted from my **card**
 ### Verbs
+In order to **pay** for my journey
+As a customer
+When my journey is complete, I need the correct amount **deducted** from my card
 ### Objects
+1. User (customer)
+2. Card
 ### Messages
+1. Card => Deducted, when touching out
 
 ##User Story 8
 ### Nouns

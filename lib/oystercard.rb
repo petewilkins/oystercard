@@ -1,7 +1,9 @@
+#Card used for TFL travel
 class Oystercard
 
   MAXIMUM_BALANCE = 90
   MINIMUM_BALANCE = 1
+  MINIMUM_CHARGE = 1
 
   attr_reader :balance, :in_journey
 
@@ -15,9 +17,6 @@ class Oystercard
     self.balance += amount
   end
 
-  def deduct(amount)
-    self.balance -= amount
-  end
 
   def in_journey?
     in_journey
@@ -29,11 +28,16 @@ class Oystercard
   end
 
   def touch_out
+    deduct(MINIMUM_CHARGE)
     self.in_journey = false
   end
 
   private
   attr_writer :in_journey, :balance
+
+  def deduct(amount)
+    self.balance -= amount
+  end
 
   def insufficient_funds?
     true if balance < MINIMUM_BALANCE
