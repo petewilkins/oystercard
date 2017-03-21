@@ -7,3 +7,4 @@ card.balance
 card.touch_in
 card.touch_out
 card.balance
+card.touch_in(entry_station)

@@ -80,7 +80,20 @@ When my journey is complete, I need the correct amount **deducted** from my card
 1. Card => Deducted, when touching out
 
 ##User Story 8
+In order to pay for my journey
+As a customer
+I need to know where I've travelled from
 ### Nouns
+In order to pay for my journey
+As a **customer**
+I need to know where I've travelled from
 ### Verbs
+In order to pay for my journey
+As a customer
+I need to **know where I've travelled from**
 ### Objects
+1. User (customer)
+2. Card
 ### Messages
+2. Card => Take station during touch_in
+2. Card => Keep record of journeys
