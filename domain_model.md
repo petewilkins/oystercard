@@ -44,11 +44,22 @@ I need to **touch in and out**.
 
 
 ##User Story 6
+In order to pay for my journey
+As a customer
+I need to have the minimum amount (£1) for a single journey.
 ### Nouns
+In order to pay for my journey
+As a **customer**
+I need to have the minimum amount (£1) for a **single journey**.
 ### Verbs
+In order to **pay** for my journey
+As a customer
+I need to **have the minimum amount (£1)** for a single journey.
 ### Objects
+1. User (customer)
+2. Card
 ### Messages
-
+1. Card => To pay, condition: balance = 1
 
 ##User Story 7
 ### Nouns
