@@ -22,29 +22,42 @@ I need my fare **deducted** from my card
 1. Card => Fare deducted
 
 
-##User Story 4
-### Nounds
+##User Story 5
+In order to get through the barriers.
+As a customer
+I need to touch in and out.
+
+### Nouns
+In order to get through the **barriers**.
+As a **customer**
+I need to touch in and out.
+### Verbs
+In order to get through the barriers.
+As a customer
+I need to **touch in and out**.
+### Objects
+1. User (customer)
+2. Card
+### Messages
+1. Card => Touch In
+2. Card => Touch Out
+
+
+##User Story 6
+### Nouns
 ### Verbs
 ### Objects
 ### Messages
 
 
-##User Story 4
-### Nounds
+##User Story 7
+### Nouns
 ### Verbs
 ### Objects
 ### Messages
 
-
-##User Story 4
-### Nounds
-### Verbs
-### Objects
-### Messages
-
-
-##User Story 4
-### Nounds
+##User Story 8
+### Nouns
 ### Verbs
 ### Objects
 ### Messages
