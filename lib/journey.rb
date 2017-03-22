@@ -12,7 +12,6 @@ class Journey
   end
 
   def finish(exit_station)
-    #penalty fare unless in_journey?
     self.current_trip = {current_trip.keys[0] => exit_station}
   end
 
