@@ -4,6 +4,7 @@ class Oystercard
 
   MAXIMUM_BALANCE = 90
   MINIMUM_BALANCE = 1
+  MINIMUM_CHARGE = 1
   PENALTY_FARE = 6
 
   attr_reader :balance, :journey_history, :journey
@@ -24,8 +25,8 @@ class Oystercard
 
   def touch_in(station)
     fail "Insufficient funds: Please top-up." if insufficient_funds?
-    deduct(PENALTY_FARE) if in_journey?
-    self.journey = Journey.new #can we change this to self.journey
+    charge_penalty if in_journey?
+    self.journey = Journey.new
     journey.start(station)
   end
 
@@ -33,15 +34,20 @@ class Oystercard
     if in_journey?
       journey.finish(station)
       journey_history << journey.current_trip
+      deduct(MINIMUM_CHARGE)
       self.journey = nil
     else
-      puts "Penalty Fare Deducted"
-      deduct(PENALTY_FARE)
+      charge_penalty
     end
   end
 
   private
   attr_writer :balance, :journey
+
+  def charge_penalty
+    puts "Penalty Fare Deducted"
+    deduct(PENALTY_FARE)
+  end
 
   def deduct(amount)
     self.balance -= amount
