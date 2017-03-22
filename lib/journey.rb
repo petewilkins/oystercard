@@ -7,10 +7,6 @@ class Journey
     @current_trip = {}
   end
 
-  def in_journey?
-    !!current_trip
-  end
-
   def start(entry_station)
     self.current_trip = {entry_station => nil}
   end
@@ -19,18 +15,6 @@ class Journey
     #penalty fare unless in_journey?
     self.current_trip = {current_trip.keys[0] => exit_station}
   end
-
-  def penalty_fare?
-
-  end
-
-  # def fare
-  #   if penalty_fare?
-  #     MINIMUM_CHARGE + 6
-  #   else
-  #     MINIMUM_CHARGE
-  #   end
-  # end
 
   private
 
