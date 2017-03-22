@@ -8,6 +8,9 @@ describe Oystercard do
     it 'has balance of zero' do
       expect(oystercard.balance).to eq(0)
     end
+    it 'has an empty array' do
+      expect(oystercard.journey_history). to eq []
+    end
   end
 
   describe '#top_up' do
@@ -51,17 +54,18 @@ describe Oystercard do
   end
 
   describe '#touch_out' do
+
     it 'changes in_journey? to false' do
       oystercard.top_up(5)
       oystercard.touch_in(station)
-      oystercard.touch_out
+      oystercard.touch_out(station)
       expect(oystercard).not_to be_in_journey
     end
 
     it "deducts fare" do
       oystercard.top_up(Oystercard::MINIMUM_BALANCE)
       oystercard.touch_in(station)
-      expect{oystercard.touch_out}.to change {oystercard.balance}.by -Oystercard::MINIMUM_CHARGE
+      expect{oystercard.touch_out(station)}.to change {oystercard.balance}.by -Oystercard::MINIMUM_CHARGE
     end
   end
 end
