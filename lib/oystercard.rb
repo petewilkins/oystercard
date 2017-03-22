@@ -1,3 +1,4 @@
+require_relative 'journey'
 #Card used for TFL travel
 class Oystercard
 
@@ -5,7 +6,7 @@ class Oystercard
   MINIMUM_BALANCE = 1
   MINIMUM_CHARGE = 1
 
-  attr_reader :balance, :journey, :journey_history
+  attr_reader :balance, :journey_history, :journey
 
   def initialize
     @balance = 0
@@ -17,27 +18,20 @@ class Oystercard
     self.balance += amount
   end
 
-  def in_journey?
-    !!journey
-  end
-
   def touch_in(station)
     fail "Insufficient funds: Please top-up." if insufficient_funds?
-    self.journey = {station => nil}
+    @journey = Journey.new
+    journey.start(station)
   end
 
   def touch_out(station)
     deduct(MINIMUM_CHARGE)
-    journey_history << {journey.keys[0] => station}
-    end_journey
+    journey.finish(station)
+    journey_history << journey.current_trip
   end
 
   private
   attr_writer :balance, :journey
-
-  def end_journey
-    self.journey = nil
-  end
 
   def deduct(amount)
     self.balance -= amount
