@@ -42,6 +42,7 @@ class Oystercard
   end
 
   private
+
   attr_writer :balance, :journey
 
   def charge_penalty

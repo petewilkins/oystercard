@@ -34,14 +34,43 @@ describe Oystercard do
     end
   end
 
-  context "#journey_history" do
+  context "#journeys" do
+    before do
+      oystercard.top_up(50)
+    end
+
+    it "expects card to not be in journey by default" do
+      expect(oystercard).to_not be_in_journey
+    end
+
+    it "expects card to be in journey once touched in" do
+      oystercard.touch_in(entry_station)
+      expect(oystercard).to be_in_journey
+    end
+
+    it "expects card not to be in journey once journey is completed" do
+      oystercard.touch_in(entry_station)
+      oystercard.touch_out(exit_station)
+      expect(oystercard).to_not be_in_journey
+    end
+
+    it "expects penalty charge after two consecutive touch_ins" do
+      oystercard.touch_in(entry_station)
+      expect{oystercard.touch_in(entry_station)}.to change{oystercard.balance}.by -Oystercard::PENALTY_FARE
+    end
+
+    it "expects penalty charge after touch_out without touch_in" do
+      expect{oystercard.touch_out(entry_station)}.to change{oystercard.balance}.by -Oystercard::PENALTY_FARE
+    end
+
+    it "expects a touch_out and touch_in to charge minimum fare" do
+      oystercard.touch_in(entry_station)
+      expect{oystercard.touch_out(entry_station)}.to change{oystercard.balance}.by -Oystercard::MINIMUM_CHARGE
+    end
+
     it "stores a journey in history" do
       allow(journey).to receive(:start)
       allow(journey).to receive(:finish)
-
-      #      plane = double(:plane, flying?: true)
-
-      oystercard.top_up(5)
       oystercard.touch_in(entry_station)
       oystercard.touch_out(exit_station)
       expect(oystercard.journey_history.length).to eq 1

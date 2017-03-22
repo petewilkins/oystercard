@@ -15,12 +15,6 @@ describe Journey do
       journey.start(entry_station)
       expect(journey.current_trip).to eq ({entry_station => nil})
     end
-
-    it "expects starting a journey to change in_journey to true" do
-      journey.start(entry_station)
-      expect(journey).to be_in_journey
-    end
-
   end
 
   describe '#finish' do
