@@ -27,7 +27,16 @@ describe Journey do
       journey.finish(exit_station)
       expect(journey.current_trip).to eq ({entry_station => exit_station})
     end
+  end
 
+  describe '#fare' do
+    it 'return the difference between the zones of 2 stations' do
+      entry_station = double("station", :zone => 1)
+      exit_station = double("station", :zone => 3)
+      journey.start(entry_station)
+      journey.finish(exit_station)
+      expect(journey.fare).to eq 2
+    end
   end
 
 end

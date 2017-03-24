@@ -2,7 +2,6 @@ require 'journey_log'
 
 describe JourneyLog do
   subject(:journeylog) { described_class.new }
-  let(:station) {double :station}
 
 
   describe '#initialze' do
@@ -17,6 +16,7 @@ describe JourneyLog do
 
   describe '#begin' do
     it 'creates a new journey' do
+      station = double("station", :zone => 1)
       journey = journeylog.begin(station)
       expect(journeylog.journey_history).to include journey
     end
@@ -24,6 +24,7 @@ describe JourneyLog do
 
   describe '#end' do
     it 'adds exit station to current journey' do
+      station = double("station", :zone => 1)
       journeylog.begin(station)
       journeylog.end(station)
       expect(journeylog.journey_history.pop.current_trip).to eq ({station => station})
@@ -32,6 +33,7 @@ describe JourneyLog do
 
   describe '#journeys' do
     it 'should return a list of previous journeys' do
+      station = double("station", :zone => 1)
       3.times {
         journeylog.begin(station)
         journeylog.end(station)

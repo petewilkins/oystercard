@@ -46,6 +46,8 @@ describe Oystercard do
     end
 
     it "expects card not to be in journey once journey is completed" do
+      entry_station = double("station", :zone => 1)
+      exit_station = double("station", :zone => 4)
       oystercard.touch_in(entry_station)
       oystercard.touch_out(exit_station)
       expect(oystercard).to_not be_in_journey
@@ -61,8 +63,10 @@ describe Oystercard do
     end
 
     it "expects a touch_out and touch_in to charge minimum fare" do
+      entry_station = double("station", :zone => 1)
+      exit_station = double("station", :zone => 4)
       oystercard.touch_in(entry_station)
-      expect{oystercard.touch_out(entry_station)}.to change{oystercard.balance}.by -Oystercard::MINIMUM_CHARGE
+      expect{oystercard.touch_out(exit_station)}.to change{oystercard.balance}.by -3
     end
 
   end

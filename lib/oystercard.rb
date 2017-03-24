@@ -1,10 +1,11 @@
+require_relative 'journey_log'
 require_relative 'journey'
-#Card used for TFL travel
+# passes entry and exit stations to the touch_in and out functions
+# provides balance of the card
 class Oystercard
 
   MAXIMUM_BALANCE = 90
   MINIMUM_BALANCE = 1
-  MINIMUM_CHARGE = 1
   PENALTY_FARE = 6
 
   attr_reader :balance, :journeylog
@@ -31,8 +32,8 @@ class Oystercard
 
   def touch_out(station)
     if in_journey?
-      journeylog.end(station)
-      deduct(MINIMUM_CHARGE)
+      fare = journeylog.end(station)
+      deduct(fare)
     else
       charge_penalty
     end

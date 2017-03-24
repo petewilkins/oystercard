@@ -1,5 +1,5 @@
 require_relative 'journey'
-
+# an intermediary between oystercard and journey classes
 class JourneyLog
 
   attr_reader :journey_class, :journey_history
@@ -19,6 +19,7 @@ class JourneyLog
   def end(station)
     journey = current_journey.finish(station)
     journey_history << journey
+    journey.fare
   end
 
   def journeys
