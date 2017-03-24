@@ -25,6 +25,11 @@ class JourneyLog
     journey_history.dup
   end
 
+  def in_journey?
+    return false if journeys.empty?
+    journeys[-1].current_trip.values.include? nil
+  end
+
   private
 
   def current_journey

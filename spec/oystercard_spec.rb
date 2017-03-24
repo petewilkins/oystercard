@@ -11,9 +11,6 @@ describe Oystercard do
       expect(oystercard.balance).to eq(0)
     end
 
-    xit "has an empty array by default" do
-      expect(oystercard.journey_history).to be_empty
-    end
   end
 
   describe "#top_up" do
@@ -39,41 +36,34 @@ describe Oystercard do
       oystercard.top_up(50)
     end
 
-    xit "expects card to not be in journey by default" do
+    it "expects card to not be in journey by default" do
       expect(oystercard).to_not be_in_journey
     end
 
-    xit "expects card to be in journey once touched in" do
+    it "expects card to be in journey once touched in" do
       oystercard.touch_in(entry_station)
       expect(oystercard).to be_in_journey
     end
 
-    xit "expects card not to be in journey once journey is completed" do
+    it "expects card not to be in journey once journey is completed" do
       oystercard.touch_in(entry_station)
       oystercard.touch_out(exit_station)
       expect(oystercard).to_not be_in_journey
     end
 
-    xit "expects penalty charge after two consecutive touch_ins" do
+    it "expects penalty charge after two consecutive touch_ins" do
       oystercard.touch_in(entry_station)
       expect{oystercard.touch_in(entry_station)}.to change{oystercard.balance}.by -Oystercard::PENALTY_FARE
     end
 
-    xit "expects penalty charge after touch_out without touch_in" do
+    it "expects penalty charge after touch_out without touch_in" do
       expect{oystercard.touch_out(entry_station)}.to change{oystercard.balance}.by -Oystercard::PENALTY_FARE
     end
 
-    xit "expects a touch_out and touch_in to charge minimum fare" do
+    it "expects a touch_out and touch_in to charge minimum fare" do
       oystercard.touch_in(entry_station)
       expect{oystercard.touch_out(entry_station)}.to change{oystercard.balance}.by -Oystercard::MINIMUM_CHARGE
     end
 
-    xit "stores a journey in history" do
-      allow(journey).to receive(:start)
-      allow(journey).to receive(:finish)
-      oystercard.touch_in(entry_station)
-      oystercard.touch_out(exit_station)
-      expect(oystercard.journey_history.length).to eq 1
-    end
   end
 end
