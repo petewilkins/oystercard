@@ -11,14 +11,14 @@ describe JourneyLog do
     end
 
     it 'creates an empty journey history' do
-      expect(journeylog.journeys).to eq []
+      expect(journeylog.journey_history).to eq []
     end
   end
 
   describe '#begin' do
     it 'creates a new journey' do
       journey = journeylog.begin(station)
-      expect(journeylog.journeys).to include journey
+      expect(journeylog.journey_history).to include journey
     end
   end
 
@@ -26,19 +26,29 @@ describe JourneyLog do
     it 'adds exit station to current journey' do
       journeylog.begin(station)
       journeylog.end(station)
-      expect(journeylog.journeys.pop.current_journey).to eq ({station => station})
+      expect(journeylog.journey_history.pop.current_trip).to eq ({station => station})
     end
   end
 
-  describe '#current_journey' do
-    it 'creates a new journey if none exists' do
-      expect(journeylog.journey_class).to receive(:new)
-      journeylog.current_journey
+  describe '#journeys' do
+    it 'should return a list of previous journeys' do
+      3.times {
+        journeylog.begin(station)
+        journeylog.end(station)
+      }
+      expect(journeys).to eq journey_history
     end
-    it 'returns an incomplete journey' do
-      journey = journeylog.begin(station)
-      expect(journeylog.current_journey).to eq journey
-    end
-
   end
+
+  # describe '#current_journey' do
+  #   it 'creates a new journey if none exists' do
+  #     expect(journeylog.journey_class).to receive(:new)
+  #     journeylog.current_journey
+  #   end
+  #   it 'returns an incomplete journey' do
+  #     journey = journeylog.begin(station)
+  #     expect(journeylog.current_journey).to eq journey
+  #   end
+
+  #end
 end

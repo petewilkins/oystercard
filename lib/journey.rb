@@ -13,6 +13,7 @@ class Journey
 
   def finish(exit_station)
     self.current_trip = {current_trip.keys[0] => exit_station}
+    return self
   end
 
   private
