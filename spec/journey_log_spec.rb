@@ -15,10 +15,18 @@ describe JourneyLog do
     end
   end
 
-  describe '#start' do
+  describe '#begin' do
     it 'creates a new journey' do
-      expect(journeylog.journey_class).to receive(:new)
-      journeylog.start(station)
+      journey = journeylog.begin(station)
+      expect(journeylog.journeys).to include journey
+    end
+  end
+
+  describe '#end' do
+    it 'adds exit station to current journey' do
+      journeylog.begin(station)
+      journeylog.end(station)
+      expect(journeylog.journeys.pop.current_journey).to eq ({station => station})
     end
   end
 
@@ -28,7 +36,7 @@ describe JourneyLog do
       journeylog.current_journey
     end
     it 'returns an incomplete journey' do
-      journey = journeylog.start(station)
+      journey = journeylog.begin(station)
       expect(journeylog.current_journey).to eq journey
     end
 
