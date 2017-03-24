@@ -9,6 +9,10 @@ describe JourneyLog do
     it 'sets to Journey by default' do
       expect(journeylog.journey_class).to eq Journey
     end
+
+    it 'creates an empty journey history' do
+      expect(journeylog.journeys).to eq []
+    end
   end
 
   describe '#start' do
@@ -23,5 +27,10 @@ describe JourneyLog do
       expect(journeylog.journey_class).to receive(:new)
       journeylog.current_journey
     end
+    it 'returns an incomplete journey' do
+      journey = journeylog.start(station)
+      expect(journeylog.current_journey).to eq journey
+    end
+
   end
 end

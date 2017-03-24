@@ -10,4 +10,8 @@ class JourneyLog
     journey_class.new
   end
 
+  def current_journey
+    @currentjourney ||= journey_class.new
+  end
+
 end
