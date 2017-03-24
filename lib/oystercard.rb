@@ -33,21 +33,16 @@ class Oystercard
   def touch_out(station)
     if in_journey?
       journey.finish(station)
-      log_journey
+      journey_history << journey.current_trip
+      deduct(MINIMUM_CHARGE)
+      self.journey = nil
     else
       charge_penalty
     end
   end
 
   private
-
   attr_writer :balance, :journey
-
-  def log_journey
-    journey_history << journey.current_trip
-    deduct(MINIMUM_CHARGE)
-    self.journey = nil
-  end
 
   def charge_penalty
     puts "Penalty Fare Deducted"
