@@ -21,6 +21,10 @@ class JourneyLog
     journey_history << journey
   end
 
+  def journeys
+    journey_history.dup
+  end
+
   private
 
   def current_journey

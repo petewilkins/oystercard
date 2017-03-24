@@ -36,7 +36,7 @@ describe JourneyLog do
         journeylog.begin(station)
         journeylog.end(station)
       }
-      expect(journeys).to eq journey_history
+      expect(journeylog.journeys).to eq journeylog.journey_history
     end
   end
 
