@@ -6,4 +6,8 @@ class JourneyLog
     @journey_class = inputclass
   end
 
+  def start(station)
+    journey_class.new
+  end
+
 end

@@ -18,4 +18,10 @@ describe JourneyLog do
     end
   end
 
+  describe '#current_journey' do
+    it 'creates a new journey if none exists' do
+      expect(journeylog.journey_class).to receive(:new)
+      journeylog.current_journey
+    end
+  end
 end

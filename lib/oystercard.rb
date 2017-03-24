@@ -45,7 +45,6 @@ class Oystercard
   attr_writer :balance, :journey
 
   def charge_penalty
-    puts "Penalty Fare Deducted"
     deduct(PENALTY_FARE)
   end
 
